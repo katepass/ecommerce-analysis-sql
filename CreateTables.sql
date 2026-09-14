@@ -1,18 +1,35 @@
-create table customers (
-	primary key(CustomerID)
+CREATE TABLE customers (
+	customer_id INT,
+    age INT,
+    city TEXT,
+    signup_date DATETIME,
+    PRIMARY KEY(customer_id)
 );
 
-create table products (
-	primary key(ProductID)
+CREATE TABLE products (
+	product_id INT,
+    product_name TEXT,
+    category TEXT,
+    unit_pice DOUBLE,
+	PRIMARY KEY(product_id)
 );
 
-create table orders (
-primary key(OrderID),
-foreign key (CustomerID) references customers(CustomerID),
-foreign key(ProductID) references products(ProductID)
+CREATE TABLE orders (
+order_id INT,
+order_date DATETIME,
+quantity INT,
+discount DOUBLE,
+payment_method TEXT,
+status TEXT,
+PRIMARY KEY(order_id),
+FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+FOREIGN KEY(product_id) REFERENCES products(product_id)
 );
 
-create table payments(
-primary key(PaymentID),
-foreign key (OrderID) references orders(OrderID)
+CREATE TABLE payments(
+payment_id INT,
+payment_date DATETIME,
+payment_status TEXT,
+PRIMARY KEY(payment_id),
+FOREIGN KEY (order_id) REFERENCES orders(order_id)
 )
